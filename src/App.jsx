@@ -9,7 +9,7 @@ export default function App() {
           Desplegada con Vite a <code>dist/</code>, subida a S3 y servida por CloudFront.
         </p>
         <p className="muted">
-          Cada push a GitHub ejecuta build, upload e invalidación del CDN.
+          Cada push a GitHub ejecuta build, upload e invalidación del CDN. hola xd
         </p>
       </section>
     </main>
