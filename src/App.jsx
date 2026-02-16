@@ -10,7 +10,6 @@ export default function App() {
         </p>
         <p className="muted">
           Cada push a GitHub ejecuta build, upload e invalidación del CDN.
-          ;(
         </p>
       </section>
     </main>

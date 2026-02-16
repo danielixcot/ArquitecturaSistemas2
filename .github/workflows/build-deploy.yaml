@@ -1,0 +1,45 @@
+---
+name: Build and Deploy to AWS CDN cloudfront
+on:
+  push:
+    branches: [assignment-02]
+  jobs: 
+    build-and-deploy:
+      name: Build and Deploy
+      runs-on: ubuntu-latest
+      env:
+        BUCKET: www.cdn-aws.com
+        DIST: build
+        REGION: us-east-2
+        DIST_ID: E21KV5AU9219Z7
+        
+      steps:
+        - name: Checkout 
+          uses: actions/checkout@v2
+
+        - name: configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ${{ env.REGION }}
+
+    #        uses: actions/setup-node@v2
+   #         with:
+  #            node-version: '14'
+
+        - name: Install dependencies
+          run: npm install
+
+        - name: Build
+          run:
+            node --version
+            npm ci --production
+        - name: Build Static files 
+          run: npm run build
+
+        - name: Copy files to the production website with the AWS CLI
+          run: aws s3 sync --delete ${{ env.DIST }} s3://${{ env.BUCKET }}
+
+        - name: Copy to the production website with the AWS CLI
+          run: aws cloudfront create-invalidation --distribution-id ${{ env.DIST_ID }} --paths "/*"
