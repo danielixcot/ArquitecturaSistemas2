@@ -1,9 +1,7 @@
 import "./App.css";
-
 export default function App() {
   return (
     <main className="page">
-      const prueba = 123;
       <section className="card">
         <h1>Mi app estática</h1>
         <p>
