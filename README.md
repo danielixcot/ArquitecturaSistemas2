@@ -4,7 +4,7 @@ Daniel Fernando Ixcot Nimatuj 202308026
 ## Captura de la Aplicacion
 <img width="1917" height="1039" alt="image" src="https://github.com/user-attachments/assets/f63ffef2-a21b-4136-a543-519d295d96af" />
 
-##¿Que es Husky?
+## ¿Que es Husky?
 Husky sirve para ejecutar tareas automáticamente antes de que Git te deje hacer un commit, para que no subas código malo al repositorio.
 
 ## URL de AWS Beanstalk para acceder a la aplicación.
