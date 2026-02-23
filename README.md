@@ -1,18 +1,17 @@
-# Assignment 02 - CDN-AWS
+# Assignment 03 - AWS Beanstalk
 Daniel Fernando Ixcot Nimatuj 202308026
 
-## conexion de Dopppler con github
-<img width="1519" height="484" alt="image" src="https://github.com/user-attachments/assets/52c00dba-e50d-4ee3-a019-731d5038e7c4" />
-
-## secretos en Doppler
-<img width="1520" height="536" alt="image" src="https://github.com/user-attachments/assets/bf2a67bd-1f9f-46d2-b0b6-073bb75cfabb" />
-
-## Secretos en Github
-<img width="1033" height="685" alt="image" src="https://github.com/user-attachments/assets/b0bf2128-238d-417f-a7cc-3ad75de213e1" />
-
 ## Captura de la Aplicacion
-<img width="1918" height="1041" alt="image" src="https://github.com/user-attachments/assets/7b4479c2-8767-456f-9a3d-e701116ba772" />
+<img width="1917" height="1039" alt="image" src="https://github.com/user-attachments/assets/f63ffef2-a21b-4136-a543-519d295d96af" />
 
+##¿Que es Husky?
+Husky sirve para ejecutar tareas automáticamente antes de que Git te deje hacer un commit, para que no subas código malo al repositorio.
 
-## URL pública del CDN de CloudFront para acceder a la aplicación.
-https://d3ohnc5ojxkb7f.cloudfront.net/
+## URL de AWS Beanstalk para acceder a la aplicación.
+Docker-web-env.eba-bvnfs4gg.us-east-2.elasticbeanstalk.com 
+
+## Capturas de pantalla de la configuración de AWS Beanstalk.
+<img width="1227" height="819" alt="image" src="https://github.com/user-attachments/assets/58aa6ca1-d7ee-4d77-afe5-972dfdd0cc46" />
+<img width="1249" height="657" alt="image" src="https://github.com/user-attachments/assets/69251f90-a334-41e1-9340-85d26028922b" />
+<img width="1238" height="813" alt="image" src="https://github.com/user-attachments/assets/c0906ab2-822b-41d5-8c41-b473ac88c4c2" />
+
