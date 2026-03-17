@@ -79,7 +79,6 @@ function App() {
           onChange={(e) => setTitle(e.target.value)}
         />
         <button type="submit">Agregar</button>
-        <h1>Lista de tareas - PRUEBA NUEVA</h1>
       </form>
 
       {loading ? (
