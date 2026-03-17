@@ -79,6 +79,7 @@ function App() {
           onChange={(e) => setTitle(e.target.value)}
         />
         <button type="submit">Agregar</button>
+        <h1>Lista de tareas - PRUEBA NUEVA</h1>
       </form>
 
       {loading ? (
@@ -86,6 +87,7 @@ function App() {
       ) : tasks.length === 0 ? (
         <p>No hay tareas registradas.</p>
       ) : (
+        
         <ul className="task-list">
           {tasks.map((task) => (
             <li key={task.id} className="task-item">
@@ -103,6 +105,7 @@ function App() {
                 <button onClick={() => handleToggleTask(task)}>
                   {task.completed ? "Desmarcar" : "Completar"}
                 </button>
+                
                 <button onClick={() => handleDeleteTask(task.id)}>
                   Eliminar
                 </button>
