@@ -6,6 +6,8 @@ https://arquitectura-sistemas2.vercel.app/
 
 ## URL del backend
 https://arquitecturasistemas2.onrender.com
+## URL de sistema de documentación
+https://arquitecturasistemas2.onrender.com/api-docs/
 
 ## Captura de pantalla de la base de datos, que deberá de coincidir con las migraciones.
 <img width="1854" height="772" alt="image" src="https://github.com/user-attachments/assets/860a1017-b21b-4db9-a13d-9d191c412605" />
