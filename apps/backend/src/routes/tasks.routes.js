@@ -1,87 +1,133 @@
 const express = require("express");
+const prisma = require("../config/prisma");
 
 const router = express.Router();
 
-let tasks = [
-  { id: 1, title: "Comprar pan", completed: false },
-  { id: 2, title: "Hacer tarea de arquitectura", completed: true }
-];
+router.get("/", async (req, res) => {
+  try {
+    const tasks = await prisma.task.findMany({
+      orderBy: {
+        id: "asc"
+      }
+    });
 
-router.get("/", (req, res) => {
-  res.json(tasks);
-});
-
-router.get("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const task = tasks.find((item) => item.id === id);
-
-  if (!task) {
-    return res.status(404).json({
-      message: "Tarea no encontrada"
+    res.json(tasks);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener las tareas",
+      error: error.message
     });
   }
-
-  res.json(task);
 });
 
-router.post("/", (req, res) => {
-  const { title, completed } = req.body;
+router.get("/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
 
-  if (!title) {
-    return res.status(400).json({
-      message: "El campo title es obligatorio"
+    const task = await prisma.task.findUnique({
+      where: { id }
+    });
+
+    if (!task) {
+      return res.status(404).json({
+        message: "Tarea no encontrada"
+      });
+    }
+
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener la tarea",
+      error: error.message
     });
   }
-
-  const newTask = {
-    id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
-    title,
-    completed: completed ?? false
-  };
-
-  tasks.push(newTask);
-
-  res.status(201).json(newTask);
 });
 
-router.put("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const { title, completed } = req.body;
+router.post("/", async (req, res) => {
+  try {
+    const { title, completed } = req.body;
 
-  const taskIndex = tasks.findIndex((item) => item.id === id);
+    if (!title) {
+      return res.status(400).json({
+        message: "El campo title es obligatorio"
+      });
+    }
 
-  if (taskIndex === -1) {
-    return res.status(404).json({
-      message: "Tarea no encontrada"
+    const newTask = await prisma.task.create({
+      data: {
+        title,
+        completed: completed ?? false
+      }
+    });
+
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al crear la tarea",
+      error: error.message
     });
   }
-
-  tasks[taskIndex] = {
-    ...tasks[taskIndex],
-    title: title ?? tasks[taskIndex].title,
-    completed: completed ?? tasks[taskIndex].completed
-  };
-
-  res.json(tasks[taskIndex]);
 });
 
-router.delete("/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const taskIndex = tasks.findIndex((item) => item.id === id);
+router.put("/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { title, completed } = req.body;
 
-  if (taskIndex === -1) {
-    return res.status(404).json({
-      message: "Tarea no encontrada"
+    const existingTask = await prisma.task.findUnique({
+      where: { id }
+    });
+
+    if (!existingTask) {
+      return res.status(404).json({
+        message: "Tarea no encontrada"
+      });
+    }
+
+    const updatedTask = await prisma.task.update({
+      where: { id },
+      data: {
+        title: title ?? existingTask.title,
+        completed: completed ?? existingTask.completed
+      }
+    });
+
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al actualizar la tarea",
+      error: error.message
     });
   }
+});
 
-  const deletedTask = tasks[taskIndex];
-  tasks = tasks.filter((item) => item.id !== id);
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = Number(req.params.id);
 
-  res.json({
-    message: "Tarea eliminada correctamente",
-    task: deletedTask
-  });
+    const existingTask = await prisma.task.findUnique({
+      where: { id }
+    });
+
+    if (!existingTask) {
+      return res.status(404).json({
+        message: "Tarea no encontrada"
+      });
+    }
+
+    await prisma.task.delete({
+      where: { id }
+    });
+
+    res.json({
+      message: "Tarea eliminada correctamente"
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al eliminar la tarea",
+      error: error.message
+    });
+  }
 });
 
 module.exports = router;
