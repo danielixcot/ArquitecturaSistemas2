@@ -14,9 +14,9 @@
   "description": "",
   "dependencies": {
     "apollo-server": "^3.13.0",
+    "better-sqlite3": "^12.9.0",
     "graphql": "^16.13.2",
-    "sequelize": "^6.37.8",
-    "sqlite3": "^6.0.1"
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
