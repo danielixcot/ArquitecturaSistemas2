@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: week4-app-route
+  namespace: week4-app
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`app.daniel-ixcot.com`)
+      kind: Rule
+      services:
+        - name: week4-app-service
+          port: 80
